@@ -64,7 +64,7 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 
     public Flickr() {
 
-        
+
 	/** create bottom subpanel with buttons, flow layout*/
 	JPanel buttonsPanel = new JPanel();
 	buttonsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
@@ -74,7 +74,7 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	buttonsPanel.add(deleteButton);
 	buttonsPanel.add(saveButton);
 	buttonsPanel.add(exitButton);
-	
+
 	/** add listener for all the buttons clicks */
 	testButton.addActionListener(this);
 	loadButton.addActionListener(this);
@@ -87,7 +87,7 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	/** create and add label to subpanel */
 	JLabel tl = new JLabel("Enter search tag:");
 	textFieldSubPanel.add(tl);
-	
+
 
 	/** set width of left text field*/
 	searchTagField.setColumns(23);
@@ -125,9 +125,9 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	/** add scrollable panel to main frame*/
 	add(oneScrollPanel);
         /** create white border for the photos */
-        whiteBorder = BorderFactory.createLineBorder(Color.WHITE, 2); 
+        whiteBorder = BorderFactory.createLineBorder(Color.WHITE, 2);
 	/** add panel with buttons and textfields to main frame */
-	add(textFieldPanel);   
+	add(textFieldPanel);
     }//end constructor
     /** main method to run GUI and other methods */
     public static void main(String [] args) throws Exception {
@@ -137,30 +137,30 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	frame.setLocationRelativeTo(null);
 	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	frame.setVisible(true);
-       
+
     }//main method
-    
+
     /** method mouseClicked to implements from MouseListener abstract class */
-    public void mouseClicked(MouseEvent m){}   
+    public void mouseClicked(MouseEvent m){}
     /** method mouseEntered to implements from MouseListener abstract class */
-    public void mouseEntered(MouseEvent m){}  
+    public void mouseEntered(MouseEvent m){}
     /** method mouseReleased to implements from MouseListener abstract class */
     public void mouseReleased(MouseEvent m){}
     /** method mousePressed to implements from MouseListener abstract class */
     public void mousePressed(MouseEvent m){}
     /** method mouseExited to implements from MouseListener abstract class */
     public void mouseExited(MouseEvent m){}
-        
+
     /** method actionPerformed implements from ActionListener abstract class */
     public void actionPerformed(ActionEvent e) {
 	if (e.getSource() == searchButton) {
             try{
                 System.out.println("Search " + searchTagField.getText());
                 /** save search tag string to key */
-                key = searchTagField.getText(); 
-                /** method request the JSON */ 
+                key = searchTagField.getText();
+                /** method request the JSON */
                 requestURL();
-                 
+
                } catch (Exception ex) {
                 Logger.getLogger(Flickr.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -169,7 +169,7 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	    System.out.println("Test");
             String s = searchTagField.getText();
             Image theImg = getImageURL(s);
-            /** make height=200pixels with aspect ration */ 
+            /** make height=200pixels with aspect ration */
             ImageIcon img = new ImageIcon(theImg.getScaledInstance(-1, 200, Image.SCALE_SMOOTH));
             JLabel jl = new JLabel(img);
             /** make border line */
@@ -182,7 +182,7 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	    oneScrollPanel.setViewportView(onePanel);
 	}
 	else if (e.getSource() == loadButton) {
-		
+
             try {
                 System.out.println("Load");    ///Users/aungphyo/Desktop/CSC413/GetPhotoUrl/GPCode/photoUrl.txt
                 Scanner scan = new Scanner(new File("../photoUrl.txt"));
@@ -198,7 +198,7 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
                     ImageIcon img = new ImageIcon(theImg.getScaledInstance(-1, 300, Image.SCALE_SMOOTH));
                     JLabel jl = new JLabel(img);
                     jl.setBorder(whiteBorder);
-                    onePanel.add(jl);     
+                    onePanel.add(jl);
                     }//for loop
                 onePanel.revalidate();
                 onePanel.repaint();
@@ -207,33 +207,33 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(Flickr.class.getName()).log(Level.SEVERE, null, ex);
             }
-                
+
 	}
 	else if (e.getSource() == deleteButton){
-		/** to remove the delete photo from onePanel */ 
+		/** to remove the delete photo from onePanel */
                 onePanel.remove(list.indexOf(delphotoUrl));
                 /** to remove that photo URL from the list */
                 list.remove(list.indexOf(delphotoUrl));
                 onePanel.revalidate();
                 onePanel.repaint();
                 System.out.println("Delete");
-                     
+
 	}
 	else if (e.getSource() == saveButton){
                 PrintWriter pw = null;
             try {
                 System.out.println("Save");
                 pw = new PrintWriter("../photoUrl.txt");
-                
+
                 for(int i = 0; i<list.size();  i++){
                     String s = list.get(i);
                     pw.write(s + "\n");
                     System.out.println(i+" "+list.get(i));
-                }//for loop      
-              /** catch the exception if there is no such file */    
+                }//for loop
+              /** catch the exception if there is no such file */
             } catch (IOException ex) {
                 Logger.getLogger(Flickr.class.getName()).log(Level.SEVERE, null, ex);
-            } 
+            }
                 pw.close();
 	}
 	else if (e.getSource() == exitButton){
@@ -243,13 +243,13 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 	}
 
  }
-     
+
        public void requestURL() throws Exception{
-             
+
         String api  = "https://api.flickr.com/services/rest/?method=flickr.photos.search";
 	/** number of results per page */
         String numPhotos = "&per_page=" + numResultsStr.getText();
-        String request = api + numPhotos;                     
+        String request = api + numPhotos;
         request += "&format=json&nojsoncallback=1&extras=geo";
         request += "&api_key=" + "***Your Flicker API KEY***";
 
@@ -263,17 +263,17 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 
 	/** open http connection */
 	URL obj = new URL(request);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+  HttpURLConnection con = (HttpURLConnection) obj.openConnection();
 
 	/** send GET request */
-        con.setRequestMethod("GET");
-        
+  con.setRequestMethod("GET");
+
 	// get response
-        int responseCode = con.getResponseCode();
-	
+  int responseCode = con.getResponseCode();
+
 	System.out.println("Response Code : " + responseCode);
 
-	// read and construct response String
+	      // read and construct response String
         BufferedReader in = new BufferedReader(new InputStreamReader
 					       (con.getInputStream()));
         String inputLine;
@@ -288,17 +288,17 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
 
 	Gson gson = new Gson();
 	String s = response.toString();
-        
-        Response responseObject = gson.fromJson(s, Response.class);
+
+  Response responseObject = gson.fromJson(s, Response.class);
 	System.out.println("# photos = " + responseObject.photos.photo.length);
-	//for loop to get all the photos 
-        for(int i=0; i<responseObject.photos.photo.length; i++){
-	  int farm = responseObject.photos.photo[i].farm;
-	  String server = responseObject.photos.photo[i].server;
-	  String id = responseObject.photos.photo[i].id;
-	  String secret = responseObject.photos.photo[i].secret;
-	  String photoUrl = "http://farm"+farm+".static.flickr.com/"
-	    +server+"/"+id+"_"+secret+".jpg";
+	//for loop to get all the photos
+  for(int i=0; i<responseObject.photos.photo.length; i++){
+    	  int farm = responseObject.photos.photo[i].farm;
+    	  String server = responseObject.photos.photo[i].server;
+    	  String id = responseObject.photos.photo[i].id;
+    	  String secret = responseObject.photos.photo[i].secret;
+    	  String photoUrl = "https://farm"+farm+".static.flickr.com/"
+    	                     +server+"/"+id+"_"+secret+".jpg";
          list.add(photoUrl);
          Image theImg = getImageURL(photoUrl);
          ImageIcon img = new ImageIcon(theImg.getScaledInstance(-1, 300, Image.SCALE_SMOOTH));
@@ -311,9 +311,9 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
                     Border blueBorder = BorderFactory.createLineBorder(Color.CYAN, 2);
                     jl.setBorder(blueBorder);
                     System.out.println("select photo " +list.indexOf(photoUrl));
-                    delphotoUrl = photoUrl;      
+                    delphotoUrl = photoUrl;
               }
-         
+
             @Override
             public void mousePressed(MouseEvent e) {}
             @Override
@@ -322,27 +322,27 @@ public class Flickr extends JFrame implements ActionListener,MouseListener {
             public void mouseEntered(MouseEvent e) {}
             @Override
             public void mouseExited(MouseEvent e) {}
-           
-         });
-         
-        }// end for loop 
+
+        });
+
+    }// end for loop
         onePanel.revalidate();
         onePanel.repaint();
         oneScrollPanel.setViewportView(onePanel);
-       
-       }//end requestURL method
-       
-       Image getImageURL(String loc) {
-        Image img = null;
-        try {
-            final URL url = new URL(loc);
-	    img = ImageIO.read(url);
-        } catch (Exception e) {
-            System.out.println("Error loading image...");
-            return null;
-        }
-        return img;
 
-       }//end getImageURL method 
-            
-}//end class 
+  }//end requestURL method
+
+      Image getImageURL(String loc) {
+          Image img = null;
+          try {
+              final URL url = new URL(loc);
+  	          img = ImageIO.read(url);
+          } catch (Exception e) {
+              System.out.println("Error loading image...");
+              return null;
+          }
+              return img;
+
+      }//end getImageURL method
+
+}//end class
