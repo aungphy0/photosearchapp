@@ -15,3 +15,11 @@ To run the program
 - download the repo
 - fill the Flickr API key at the place
 - run with the command ./goGP
+
+## Video Walkthrough
+
+Here's a walkthrough of implemented user stories:
+
+<img src='http://i.imgur.com/ou32VfEh.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+
+GIF created with [LiceCap](http://www.cockos.com/licecap/).
