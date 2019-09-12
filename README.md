@@ -20,6 +20,7 @@ To run the program
 
 Here's a walkthrough of implemented user stories:
 
+[img]https://i.imgur.com/Q23bcxT.gif[/img]
 <img src='https://imgur.com/Q23bcxT' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
